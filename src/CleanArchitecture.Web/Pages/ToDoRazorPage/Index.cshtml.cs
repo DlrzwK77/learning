@@ -2,6 +2,7 @@
 using CleanArchitecture.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.ToDoRazorPage
 {
@@ -16,9 +17,9 @@ namespace CleanArchitecture.Web.Pages.ToDoRazorPage
             _repository = repository;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            ToDoItems = _repository.List<ToDoItem>();
+            ToDoItems = await _repository.ListAsync<ToDoItem>();
         }
     }
 }

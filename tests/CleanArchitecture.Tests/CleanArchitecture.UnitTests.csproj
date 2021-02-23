@@ -8,11 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!--<PackageReference Include="coverlet.msbuild">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>-->
     <PackageReference Include="Moq" />
     <PackageReference Include="ReportGenerator" />
   </ItemGroup>
   
   <ItemGroup>
+    <!--<ProjectReference Include="..\..\src\CleanArchitecture.Core\CleanArchitecture.Core.csproj" />
+    <ProjectReference Include="..\..\src\CleanArchitecture.Infrastructure\CleanArchitecture.Infrastructure.csproj" />-->
     <ProjectReference Include="..\..\src\CleanArchitecture.Web\CleanArchitecture.Web.csproj" />
   </ItemGroup>
 

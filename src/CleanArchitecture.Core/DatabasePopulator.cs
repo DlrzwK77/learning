@@ -8,25 +8,51 @@ namespace CleanArchitecture.Core
     {
         public static int PopulateDatabase(IRepository todoRepository)
         {
-            if (todoRepository.List<ToDoItem>().Count() >= 5) return 0;
 
-            todoRepository.Add(new ToDoItem
+
+            if (todoRepository.ListAsync<ToDoItem>().Result.Count() >= 3) return 0;
+
+            todoRepository.AddAsync(new ToDoItem
+            {
+                Title = "Get Sample Working",
+                Description = "Try to get the sample to build."
+            }).Wait();
+            todoRepository.AddAsync(new ToDoItem
+            {
+                Title = "Review Solution",
+                Description = "Review the different projects in the solution and how they relate to one another."
+            }).Wait();
+            todoRepository.AddAsync(new ToDoItem
+            {
+                Title = "Run and Review Tests",
+                Description = "Make sure all the tests run and review what they are doing."
+            }).Wait();
+
+            return todoRepository.ListAsync<ToDoItem>().Result.Count;
+
+
+
+            /*
+            if (todoRepository.ListAsync<ToDoItem>().Count() >= 5) return 0;
+
+            todoRepository.AddAsync(new ToDoItem
             {
                 Title = "Get Sample Working",
                 Description = "Try to get the sample to build."
             });
-            todoRepository.Add(new ToDoItem
+            todoRepository.AddAsync(new ToDoItem
             {
                 Title = "Review Solution",
                 Description = "Review the different projects in the solution and how they relate to one another."
             });
-            todoRepository.Add(new ToDoItem
+            todoRepository.AddAsync(new ToDoItem
             {
                 Title = "Run and Review Tests",
                 Description = "Make sure all the tests run and review what they are doing."
             });
 
-            return todoRepository.List<ToDoItem>().Count;
+            return todoRepository.ListAsync<ToDoItem>().Count;
+            */
         }
     }
 }
