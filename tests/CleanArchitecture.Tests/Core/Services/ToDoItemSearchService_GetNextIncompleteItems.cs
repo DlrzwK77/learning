@@ -12,7 +12,7 @@ using Xunit;
 
 namespace CleanArchitecture.UnitTests.Core.Services
 {
-    public class ToDoItemSearchService_GetNextIncompleteItem
+    public class ToDoItemSearchService_GetNextIncompleteItems
     {
         [Fact]
         public async Task ReturnsNotFoundGivenNoRemainingItems()
