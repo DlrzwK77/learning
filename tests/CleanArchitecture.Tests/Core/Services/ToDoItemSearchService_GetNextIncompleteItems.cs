@@ -21,7 +21,7 @@ namespace CleanArchitecture.UnitTests.Core.Services
             var service = new ToDoItemSearchService(repo.Object);
             repo.Setup(r => r.ListAsync(It.IsAny<ISpecification<ToDoItem>>()))
                 .ReturnsAsync(new List<ToDoItem>());
-            var result = await service.GetNextIncompleteItem();
+            var result = await service.GetNextIncompleteItemsAsync();
             Assert.Equal(Ardalis.Result.ResultStatus.NotFound, result.Status);
         }
 
@@ -33,7 +33,7 @@ namespace CleanArchitecture.UnitTests.Core.Services
             var testItems = GetTestItems();
             repo.Setup(r => r.ListAsync(It.IsAny<ISpecification<ToDoItem>>()))
                 .ReturnsAsync(testItems);
-            var result = await service.GetNextIncompleteItem();
+            var result = await service.GetNextIncompleteItemsAsync();
             Assert.Equal(testItems.First(), result.Value);
         }
 

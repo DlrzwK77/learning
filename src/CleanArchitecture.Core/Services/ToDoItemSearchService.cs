@@ -17,7 +17,7 @@ namespace CleanArchitecture.Core.Services
         {
             _repository = repository;
         }
-        public async Task<Result<List<ToDoItem>>> GetAllIncompleteItems(string searchString)
+        public async Task<Result<List<ToDoItem>>> GetAllIncompleteItemsAsync(string searchString)
         {
             if (string.IsNullOrEmpty(searchString))
             {
@@ -29,12 +29,27 @@ namespace CleanArchitecture.Core.Services
                 });
                 return Result<List<ToDoItem>>.Invalid(errors);
             }
+            //1)
+            /*
             var incompleteSpec = new IncompleteItemsSpecification();
             var items = await _repository.ListAsync(incompleteSpec);
             return new Result<List<ToDoItem>>(items);
+            */
+            //2)
+            var incompleteSpec = new IncompleteItemsSpecification();
+            try
+            {
+                var items = await _repository.ListAsync(incompleteSpec);
+                return new Result<List<ToDoItem>>(items);
+            }
+            catch (Exception ex)
+            {
+
+                return Result<List<ToDoItem>>.Error(new[] { ex.Message });
+            }
         }
 
-        public async Task<Result<ToDoItem>> GetNextIncompleteItem()
+        public async Task<Result<ToDoItem>> GetNextIncompleteItemsAsync()
         {
             var incompleteSpec = new IncompleteItemsSpecification();
             var items = await _repository.ListAsync(incompleteSpec);
