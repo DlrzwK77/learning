@@ -28,15 +28,12 @@ namespace CleanArchitecture.UnitTests.Core.Services
         [Fact]
         public async Task ReturnsErrorGivenDataAccessException()
         {
-            //string expectedErrorMessage = "Database not there.";
             var repo = new Mock<IRepository>();
             var service = new ToDoItemSearchService(repo.Object);
             repo.Setup(r => r.ListAsync(It.IsAny<ISpecification<ToDoItem>>()))
                 .ThrowsAsync(new Exception("Database not there."));
-            var result = await service.GetAllIncompleteItemsAsync(null/*null*/);
+            var result = await service.GetAllIncompleteItemsAsync(null);
             Assert.Equal(Ardalis.Result.ResultStatus.Invalid, result.Status);
-
-            //Assert.Equal(expectedErrorMessage, result.Errors.First());
         }
 
         [Fact]
