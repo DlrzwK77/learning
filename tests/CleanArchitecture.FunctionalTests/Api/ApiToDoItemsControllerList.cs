@@ -26,7 +26,7 @@ namespace CleanArchitecture.FunctionalTests.Api
             var stringResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<IEnumerable<ToDoItem>>(stringResponse).ToList();
 
-            Assert.Equal(3, result.Count());
+            Assert.Equal(3, result.Count);
             Assert.Contains(result, i => i.Title == SeedData.ToDoItem1.Title);
             Assert.Contains(result, i => i.Title == SeedData.ToDoItem2.Title);
             Assert.Contains(result, i => i.Title == SeedData.ToDoItem3.Title);
